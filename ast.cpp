@@ -38,7 +38,7 @@ float Initializer::evaluate() {
 
 float Variables::evaluate(){
     variables[this->id] = this->val->evaluate();
-    printf("Variable creada ", this->id);
+    printf("Variable declarada ");
     return 0;
 }
 
