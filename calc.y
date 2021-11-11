@@ -39,17 +39,11 @@ START: imput
 {
     list<Expr *>::iterator it = $1->begin();
     while(it != $1->end()){
-        printf("result: %f \n", (*it)->evaluate());
+        printf("resultado: %f \n", (*it)->evaluate());
         it++;
     }
 }
-    |exprlist {
-    list<Expr *>::iterator it = $1->begin();
-    while(it != $1->end()){
-        printf("result: %f \n", (*it)->evaluate());
-        it++;
-    }
-}
+    | exprlist imput
     ;
 
 
@@ -74,8 +68,8 @@ Initializer: assigExpression {
 
 assigExpression: rel;
 
-imput: rel EOL { $$ = new exprlist; $$->push_back($1); }
-    | imput rel EOL { $$ = $1; $$->push_back($2); }
+imput: rel  { $$ = new exprlist; $$->push_back($1); }
+    | imput rel  { $$ = $1; $$->push_back($2); }
     ;
 
 rel: rel '>' expr { $$ = new GTExpr($1, $3); }
